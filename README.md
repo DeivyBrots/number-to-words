@@ -7,6 +7,10 @@
 
 This library allows you to convert a number to words.
 
+## Why forked
+Added not showing 0 value of currency as another one method.
+I mean i don't want to get 'Zero dollars five cents', i need just a 'five cents' in this case. 
+
 ## Installation
 
 Add package to your composer.json

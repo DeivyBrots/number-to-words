@@ -2,6 +2,7 @@
 
 namespace NumberToWords;
 
+use NumberToWords\CurrencyTransformer\CurrencyOptionalTransformer;
 use NumberToWords\CurrencyTransformer\CurrencyTransformer;
 use NumberToWords\CurrencyTransformer\GermanCurrencyTransformer;
 use NumberToWords\CurrencyTransformer\DanishCurrencyTransformer;
@@ -84,6 +85,10 @@ class NumberToWords
         'ua' => UkrainianCurrencyTransformer::class
     ];
 
+    private $currencyOptionalTransformers = [
+        'ua' => UkrainianCurrencyTransformer::class
+    ];
+
     /**
      * @param string $language
      *
@@ -118,5 +123,23 @@ class NumberToWords
         }
 
         return new $this->currencyTransformers[$language];
+    }
+
+    /**
+     * @param string $language
+     *
+     * @throws \InvalidArgumentException
+     * @return CurrencyOptionalTransformer
+     */
+    public function getCurrencyOptionalTransformer($language)
+    {
+        if (!array_key_exists($language, $this->currencyOptionalTransformers)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Currency transformer for "%s" language is not implemented.',
+                $language
+            ));
+        }
+
+        return new $this->currencyOptionalTransformers[$language];
     }
 }

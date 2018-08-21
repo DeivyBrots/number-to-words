@@ -306,13 +306,15 @@ class Ru extends Words
      * @param string $currency
      * @param int    $decimal
      * @param int    $fraction
+     * @param array  $params
      *
      * @throws NumberToWordsException
      * @return string
      */
-    public function toCurrencyWords($currency, $decimal, $fraction = null)
+    public function toCurrencyWords($currency, $decimal, $fraction = null, $params = [])
     {
         $currency = strtoupper($currency);
+        $writeZero = isset($params['writeZero']) && $params['writeZero'] === true;
 
         if (!array_key_exists($currency, static::$currencyNames)) {
             throw new NumberToWordsException(
@@ -326,7 +328,11 @@ class Ru extends Words
             static::$ten = array_reverse(static::$ten);
         }
 
-        $return = $this->toWords($decimal) . ' ' . $this->morph($decimal, $currencyNames[0][1], $currencyNames[0][2], $currencyNames[0][3]);
+        if($decimal === 0 && !$writeZero){
+            $return = '';
+        } else {
+            $return = $this->toWords($decimal) . ' ' . $this->morph($decimal, $currencyNames[0][1], $currencyNames[0][2], $currencyNames[0][3]);
+        }
 
         if ($currencyNames[0][0] === 2) {
             static::$ten = array_reverse(static::$ten);
