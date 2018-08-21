@@ -40,6 +40,7 @@ use NumberToWords\NumberTransformer\SwedishNumberTransformer;
 use NumberToWords\NumberTransformer\TurkishNumberTransformer;
 use NumberToWords\NumberTransformer\TurkmenNumberTransformer;
 use NumberToWords\NumberTransformer\UkrainianNumberTransformer;
+use NumberToWords\PartedCurrencyTransformer\UkrainianPartedCurrencyTransformer;
 
 class NumberToWords
 {
@@ -86,7 +87,7 @@ class NumberToWords
     ];
 
     private $currencyOptionalTransformers = [
-        'ua' => UkrainianCurrencyTransformer::class
+        'ua' => UkrainianPartedCurrencyTransformer::class
     ];
 
     /**

@@ -51,7 +51,7 @@ class Words
      * @return string
      * @throws NumberToWordsException
      */
-    public function transformToCurrencyOptional($amount, $locale, $currency, array $params = [])
+    public function transformToPartedCurrency($amount, $locale, $currency, array $params = [])
     {
         $localeClassName = $this->resolveLocaleClassName($locale);
         $transformer = new $localeClassName();
@@ -60,10 +60,10 @@ class Words
         $fractionalPart = $amount % 100;
 
         if (0 === $fractionalPart) {
-            return trim($transformer->toCurrencyWords($currency, $decimalPart));
+            return trim($transformer->toCurrencyWords($currency, $decimalPart, null, $params));
         }
 
-        return trim($transformer->toCurrencyWords($currency, $decimalPart, $fractionalPart));
+        return trim($transformer->toCurrencyWords($currency, $decimalPart, $fractionalPart, $params));
     }
 
     /**

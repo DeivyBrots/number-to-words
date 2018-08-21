@@ -4,7 +4,7 @@ namespace NumberToWords\CurrencyTransformer;
 
 use NumberToWords\Legacy\Numbers\Words;
 
-class UkrainianCurrencyTransformer implements CurrencyTransformer, CurrencyOptionalTransformer
+class UkrainianCurrencyTransformer implements CurrencyTransformer
 {
     /**
      * @param int $amount
@@ -27,10 +27,10 @@ class UkrainianCurrencyTransformer implements CurrencyTransformer, CurrencyOptio
      * @return string
      * @throws \NumberToWords\Exception\NumberToWordsException
      */
-    public function toWordsOptional($amount, $currency, array $params = [])
+    public function toWordsOptional($amount, $currency)
     {
         $converter = new Words();
 
-        return $converter->transformToCurrency($amount, 'ua', $currency, $params);
+        return $converter->transformToCurrency($amount, 'ua', $currency);
     }
 }
